@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebRTC String Transfer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+</head>
+<body>
+  <h1>WebRTC String Transfer</h1>
+  <form id="messageForm">
+    <input type="text" id="messageInput" placeholder="Enter your message">
+    <button type="submit">Send Message</button>
+  </form>
+
+  <script>
+    const socket = io();
+
+    const messageForm = document.getElementById('messageForm');
+    const messageInput = document.getElementById('messageInput');
+
+    messageForm.addEventListener('submit', (event) => {
+      event.preventDefault(); // 폼이 submit 되는 기본 동작을 막음
+      const message = messageInput.value;
+      socket.emit('sendMessage', message);
+      messageInput.value = ''; // 전송 후 입력 필드를 비움
+    });
+  </script>
+</body>
+</html>
+
+
+
